@@ -1,0 +1,7 @@
+/.settings
+/target
+.classpath
+.project
+flyway.properties
+/src/test
+/src/main/resources/config.properties
