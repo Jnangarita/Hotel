@@ -9,20 +9,20 @@ import java.io.IOException;
 
 public class MainApp extends Application {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+	public static void main(String[] args) {
+		launch(args);
+	}
 
-    @Override
-    public void start(Stage primaryStage) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/HolaMundo.fxml"));
-            Scene scene = new Scene(root, 800, 600);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Hotel Quilla");
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
+			Scene scene = new Scene(root, 750, 510);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Hotel Quilla");
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
