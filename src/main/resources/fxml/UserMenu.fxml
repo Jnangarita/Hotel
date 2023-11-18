@@ -1,16 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controller.UserMenuController">
    <children>
-      <Label layoutX="142.0" layoutY="106.0" text="Ventana del menú del usuario">
+      <Pane prefHeight="510.0" prefWidth="234.0" style="-fx-background-color: #2e5acb;">
+         <children>
+            <Separator layoutX="17.0" layoutY="167.0" prefWidth="200.0" />
+            <ImageView fitHeight="101.0" fitWidth="121.0" layoutX="46.0" layoutY="47.0">
+               <image>
+                  <Image url="@../img/hotel.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnRegisterReservation" layoutX="13.0" layoutY="194.0" mnemonicParsing="false" onAction="#goToReservationScreen" prefHeight="46.0" prefWidth="207.0" style="-fx-background-color: transparent;" text="Registro de reservas" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@../img/document.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSearch" layoutX="28.0" layoutY="253.0" mnemonicParsing="false" onAction="#goToSearchScreen" style="-fx-background-color: transparent;" text="Búsqueda" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="48.0" fitWidth="48.0">
+                     <image>
+                        <Image url="@../img/search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="234.0" layoutY="60.0" prefHeight="109.0" prefWidth="516.0" style="-fx-background-color: #5b96e8;" />
+      <Label layoutX="252.0" layoutY="192.0" text="Bienvenido">
          <font>
-            <Font size="24.0" />
+            <Font name="Arial Bold" size="24.0" />
          </font>
       </Label>
+      <Label layoutX="252.0" layoutY="228.0" prefHeight="68.0" prefWidth="493.0" text="Sistema de reserva de hotel. Controle y administre de forma óptima y fácil el flujo de reservas y de huespédes del hotel" wrapText="true">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="252.0" layoutY="299.0" prefHeight="68.0" prefWidth="469.0" text="Esta herramienta le permitirá llevar un control completo y detallado de sus reservas y húespedes, tendrá acceso a herramientas especiales para tareas especificas como lo son:" wrapText="true">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="252.0" layoutY="380.0" text="- Registro de Reservas y Huéspedes">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="252.0" layoutY="409.0" text="- Edición de Reservas y Huéspedes existentes">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="252.0" layoutY="439.0" text="- Eliminar todo tipo de registros">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnClose" layoutX="721.0" layoutY="1.0" mnemonicParsing="false" onAction="#close" style="-fx-background-color: transparent;" text="X">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
