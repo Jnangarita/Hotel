@@ -49,7 +49,7 @@ public class RegisterController {
 	@FXML
 	public void saveNewUser(ActionEvent event) {
 		try {
-			if(txtPassword.getText().isEmpty() && txtConfirmPassword.getText().isEmpty()) {
+			if(txtPassword.getText().isEmpty() || txtConfirmPassword.getText().isEmpty()) {
 				throw new KnownExceptions("Los campos no pueden ser vacíos");
 			}
 			String password = util.encryptPassword(txtPassword.getText());
