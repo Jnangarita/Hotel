@@ -20,6 +20,7 @@ public class UserDao {
 				executeQueryToSave(user, statement);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new UnknownExceptions("Ocurrió un error al tratar de registrar el usuario");
 		}
 	}
@@ -37,6 +38,7 @@ public class UserDao {
 				}
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new UnknownExceptions("Ocurrió un error al tratar de registrar el usuario");
 		}
 	}
@@ -59,6 +61,7 @@ public class UserDao {
 			}
 			return userFound;
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new UnknownExceptions("Ocurrió un error al tratar de obtener el usuario");
 		}
 	}

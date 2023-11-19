@@ -20,4 +20,8 @@ public class Util {
         }
         return hexString.toString();
     }
+
+    public String generateGuestId(int numberGuests) {
+        return String.format("HQ%08d", ++numberGuests);
+    }
 }
