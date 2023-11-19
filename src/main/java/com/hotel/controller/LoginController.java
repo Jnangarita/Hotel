@@ -59,6 +59,7 @@ public class LoginController {
     		commons.openScreen(event, route);
     	}else {
     		System.out.println("Usuario y contraseña inválidos");
+    		commons.clearTextField(txtUser, txtPassword);
     	}
     }
 
