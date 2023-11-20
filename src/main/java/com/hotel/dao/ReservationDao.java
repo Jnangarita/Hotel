@@ -22,7 +22,7 @@ public class ReservationDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new UnknownExceptions("Ocurrió un error al tratar de registrar el usuario");
+			throw new UnknownExceptions("Ocurrió un error al tratar de registrar la reserva");
 		}
 	}
 
@@ -43,7 +43,7 @@ public class ReservationDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new UnknownExceptions("Ocurrió un error al tratar de registrar el usuario");
+			throw new UnknownExceptions("Ocurrió un error al tratar de registrar la reserva");
 		}
 	}
 }

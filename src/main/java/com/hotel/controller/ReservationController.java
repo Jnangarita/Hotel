@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
+import com.hotel.dao.GuestRegisterDao;
 import com.hotel.dao.ReservationDao;
 import com.hotel.enumerations.PaymentMethod;
 import com.hotel.exception.KnownExceptions;
@@ -36,11 +37,14 @@ public class ReservationController {
 
 	private ReservationDao reservationDao;
 
+	private GuestRegisterDao guestRegisterDao;
+
 	Util util = new Util();
 
     public ReservationController() throws IOException, SQLException {
 		var factory = new ConnectionFactory();
 		this.reservationDao = new ReservationDao(factory.createConnection());
+		this.guestRegisterDao = new GuestRegisterDao(factory.createConnection());
     }
 
 	@FXML
@@ -49,7 +53,7 @@ public class ReservationController {
 				|| dpDateCheckOut.getValue() == null || txtReservationPrice.getText().isEmpty()) {
 			throw new KnownExceptions("Los campos no pueden ser vacíos");
 		}
-		String idReservation = util.generateGuestId(0);
+		String idReservation = util.generateGuestId(guestRegisterDao.getNumberOfGuestRows());
 		LocalDate dateCheckIn = dpDateCheckIn.getValue();
 		Date dpDateCheckInFormat = Date.valueOf(dateCheckIn);
 		LocalDate dateCheckOut = dpDateCheckOut.getValue();
