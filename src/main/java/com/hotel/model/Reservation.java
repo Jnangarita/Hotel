@@ -10,16 +10,16 @@ public class Reservation {
 	private Double price;
 	private String paymentMethod;
 
-	public int getId() {
-		return this.id;
-	}
-
 	public Reservation(String idReservation, Date dateCheckIn, Date dateCheckOut, Double price, String paymentMethod) {
 		this.idReservation = idReservation;
 		this.dateCheckIn = dateCheckIn;
 		this.dateCheckOut = dateCheckOut;
 		this.price = price;
 		this.paymentMethod = paymentMethod;
+	}
+
+	public int getId() {
+		return this.id;
 	}
 
 	public void setId(Integer idUser) {

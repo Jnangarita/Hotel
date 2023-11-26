@@ -16,7 +16,11 @@ import com.hotel.utils.Util;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class ReservationController {
 
@@ -35,7 +39,7 @@ public class ReservationController {
 	@FXML
 	private TextField txtReservationPrice;
 
-	private ReservationDao reservationDao;
+	ReservationDao reservationDao;
 
 	private GuestRegisterDao guestRegisterDao;
 
@@ -53,6 +57,7 @@ public class ReservationController {
 				|| dpDateCheckOut.getValue() == null || txtReservationPrice.getText().isEmpty()) {
 			throw new KnownExceptions("Los campos no pueden ser vacíos");
 		}
+
 		String idReservation = util.generateGuestId(guestRegisterDao.getNumberOfGuestRows());
 		LocalDate dateCheckIn = dpDateCheckIn.getValue();
 		Date dpDateCheckInFormat = Date.valueOf(dateCheckIn);
@@ -61,7 +66,18 @@ public class ReservationController {
 		Double price = Double.parseDouble(txtReservationPrice.getText());
 		Reservation reservation = new Reservation(idReservation, dpDateCheckInFormat, dpDateCheckOutFormat, price,
 				comboPaymentMethod.getValue().toString());
-		reservationDao.saveReservation(reservation);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GuestRegister.fxml"));
+		try {
+			Parent root = loader.load();
+			GuestRegisterController controller = loader.getController();
+			controller.setReservationController(reservation);
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			throw new KnownExceptions("Ocurrió un error en la reservación");
+		}
 	}
 
 	@FXML

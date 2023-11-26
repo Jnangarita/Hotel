@@ -3,6 +3,7 @@ package com.hotel.dao;
 import java.sql.*;
 
 import com.hotel.exception.UnknownExceptions;
+import com.hotel.model.Guest;
 
 public class GuestRegisterDao {
 	private final Connection con;
@@ -30,6 +31,47 @@ public class GuestRegisterDao {
 			e.printStackTrace();
 			throw new UnknownExceptions(
 					"Ocurrió un error al tratar de obtener el número de filas de la tabla huespedes");
+		}
+	}
+
+	public boolean saveGuest(Guest guest) {
+		boolean registrationResult = false;
+		try {
+			String querySave = "INSERT INTO huespedes (nombre, apellido, fecha_de_nacimiento, nacionalidad, telefono, id_reserva)"
+					+ " VALUES (?, ?, ?, ?, ?, ?)";
+			final PreparedStatement statement = con.prepareStatement(querySave, Statement.RETURN_GENERATED_KEYS);
+			try (statement) {
+				registrationResult = executeQueryToSave(guest, statement);
+			}
+			return registrationResult;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new UnknownExceptions("Ocurrió un error al tratar de registrar la reserva");
+		}
+	}
+
+	private boolean executeQueryToSave(Guest guest, PreparedStatement statement) {
+		boolean registrationResult = false;
+		try {
+			statement.setString(1, guest.getName());
+			statement.setString(2, guest.getLastName());
+			statement.setDate(3, guest.getBirthdate());
+			statement.setString(4, guest.getNationality());
+			statement.setString(5, guest.getPhone());
+			statement.setString(6, guest.getIdReservation());
+			statement.execute();
+			final ResultSet resultSet = statement.getGeneratedKeys();
+			try (resultSet) {
+				while (resultSet.next()) {
+					guest.setId(resultSet.getInt(1));
+					System.out.println("Inserto el huésped: " + guest.toString());
+					registrationResult = true;
+				}
+			}
+			return registrationResult;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new UnknownExceptions("Ocurrió un error al tratar de registrar el huésped");
 		}
 	}
 }
