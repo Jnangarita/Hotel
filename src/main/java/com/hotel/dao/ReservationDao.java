@@ -1,12 +1,15 @@
 package com.hotel.dao;
 
 import java.sql.*;
+import java.util.logging.Logger;
 
 import com.hotel.exception.UnknownExceptions;
 import com.hotel.model.Reservation;
 
 public class ReservationDao {
 	private final Connection con;
+
+	private static final Logger logger = Logger.getLogger(ReservationDao.class.getName());
 
 	public ReservationDao(Connection con) {
 		this.con = con;
@@ -41,7 +44,7 @@ public class ReservationDao {
 			try (resultSet) {
 				while (resultSet.next()) {
 					reservation.setId(resultSet.getInt(1));
-					System.out.println("Inserto la reserva: " + reservation.toString());
+					logger.info("***** La reservación se ha registrado correctamente *****");
 					result = true;
 				}
 			}

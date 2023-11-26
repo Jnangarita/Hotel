@@ -1,12 +1,15 @@
 package com.hotel.dao;
 
 import java.sql.*;
+import java.util.logging.Logger;
 
 import com.hotel.exception.UnknownExceptions;
 import com.hotel.model.Guest;
 
 public class GuestRegisterDao {
 	private final Connection con;
+
+	private static final Logger logger = Logger.getLogger(GuestRegisterDao.class.getName());
 
 	public GuestRegisterDao(Connection con) {
 		this.con = con;
@@ -64,7 +67,7 @@ public class GuestRegisterDao {
 			try (resultSet) {
 				while (resultSet.next()) {
 					guest.setId(resultSet.getInt(1));
-					System.out.println("Inserto el huésped: " + guest.toString());
+					logger.info("***** El huésped se ha registrado correctamente *****");
 					registrationResult = true;
 				}
 			}
