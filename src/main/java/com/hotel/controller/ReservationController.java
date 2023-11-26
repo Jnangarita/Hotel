@@ -63,18 +63,18 @@ public class ReservationController {
 		Date dpDateCheckInFormat = Date.valueOf(dateCheckIn);
 		LocalDate dateCheckOut = dpDateCheckOut.getValue();
 		Date dpDateCheckOutFormat = Date.valueOf(dateCheckOut);
-		Double price = Double.parseDouble(txtReservationPrice.getText());
-		Reservation reservation = new Reservation(idReservation, dpDateCheckInFormat, dpDateCheckOutFormat, price,
-				comboPaymentMethod.getValue().toString());
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GuestRegister.fxml"));
+		Long reservedDays = util.getReservedDays(dateCheckIn, dateCheckOut);
+		Double reservePrice = Double.parseDouble(txtReservationPrice.getText()) * reservedDays;
+		Reservation reservation = new Reservation(idReservation, dpDateCheckInFormat, dpDateCheckOutFormat,
+				reservePrice, comboPaymentMethod.getValue().toString());
+		Stage stage = (Stage) btnNext.getScene().getWindow(); // Obtiene el Stage actual
 		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GuestRegister.fxml"));
 			Parent root = loader.load();
 			GuestRegisterController controller = loader.getController();
 			controller.setReservationController(reservation);
 			Scene scene = new Scene(root);
-			Stage stage = new Stage();
 			stage.setScene(scene);
-			stage.show();
 		} catch (IOException e) {
 			throw new KnownExceptions("Ocurrió un error en la reservación");
 		}

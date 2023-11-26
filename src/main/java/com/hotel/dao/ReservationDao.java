@@ -12,21 +12,24 @@ public class ReservationDao {
 		this.con = con;
 	}
 
-	public void saveReservation(Reservation reservation) {
+	public boolean saveReservation(Reservation reservation) {
+		boolean result = false;
 		try {
 			String querySave = "INSERT INTO reservas (id_reserva, fecha_entrada, fecha_salida, valor, forma_pago)"
 					+ " VALUES (?, ?, ?, ?, ?)";
 			final PreparedStatement statement = con.prepareStatement(querySave, Statement.RETURN_GENERATED_KEYS);
 			try (statement) {
-				executeQueryToSave(reservation, statement);
+				result = executeQueryToSave(reservation, statement);
 			}
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new UnknownExceptions("Ocurrió un error al tratar de registrar la reserva");
 		}
 	}
 
-	private void executeQueryToSave(Reservation reservation, PreparedStatement statement) {
+	private boolean executeQueryToSave(Reservation reservation, PreparedStatement statement) {
+		boolean result = false;
 		try {
 			statement.setString(1, reservation.getIdReservation());
 			statement.setDate(2, reservation.getDateCheckIn());
@@ -39,8 +42,10 @@ public class ReservationDao {
 				while (resultSet.next()) {
 					reservation.setId(resultSet.getInt(1));
 					System.out.println("Inserto la reserva: " + reservation.toString());
+					result = true;
 				}
 			}
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new UnknownExceptions("Ocurrió un error al tratar de registrar la reserva");

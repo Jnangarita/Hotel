@@ -3,6 +3,8 @@ package com.hotel.utils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Util {
     public String encryptPassword(String user) throws NoSuchAlgorithmException {
@@ -24,4 +26,8 @@ public class Util {
     public String generateGuestId(int numberGuests) {
         return String.format("HQ%08d", ++numberGuests);
     }
+
+	public Long getReservedDays(LocalDate firstDay, LocalDate lastDay) {
+		return ChronoUnit.DAYS.between(firstDay, lastDay);
+	}
 }

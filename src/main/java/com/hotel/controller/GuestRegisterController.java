@@ -10,9 +10,11 @@ import java.util.List;
 import com.hotel.dao.GuestRegisterDao;
 import com.hotel.dao.ReservationDao;
 import com.hotel.enumerations.Nationality;
+import com.hotel.exception.KnownExceptions;
 import com.hotel.factory.ConnectionFactory;
 import com.hotel.model.Guest;
 import com.hotel.model.Reservation;
+import com.hotel.utils.Commons;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,8 +50,11 @@ public class GuestRegisterController {
 
 	private GuestRegisterDao guestRegisterDao;
 
+	Commons commons = new Commons();
+
 	public void setReservationController(Reservation reservation) {
 		this.reservationController = reservation;
+		txtReservationNumber.setText(this.reservationController.getIdReservation());
 	}
 
 	public GuestRegisterController() throws IOException, SQLException {
@@ -61,17 +66,28 @@ public class GuestRegisterController {
 	@FXML
 	void saveGuestRecord(ActionEvent event) {
 		boolean registrationResult = false;
+		boolean result = false;
+		if (txtName.getText().isEmpty() || txtLastName.getText().isEmpty() || dpBirthdate.getValue() == null
+				|| comboNationality.getValue().toString().isEmpty() || txtPhone.getText().isEmpty()) {
+			throw new KnownExceptions("Los campos no pueden ser vacíos");
+		}
 		String name = txtName.getText();
 		String lastName = txtLastName.getText();
 		LocalDate date = dpBirthdate.getValue();
-		Date dpBirthdate = Date.valueOf(date);
+		Date birthdate = Date.valueOf(date);
 		String nationality = comboNationality.getValue().toString();
 		String phone = txtPhone.getText();
 		String idReservation = this.reservationController.getIdReservation();
-		Guest guest = new Guest(name, lastName, dpBirthdate, nationality, phone, idReservation);
+		Guest guest = new Guest(name, lastName, birthdate, nationality, phone, idReservation);
 		registrationResult = guestRegisterDao.saveGuest(guest);
-		if(registrationResult) {
-			reservationDao.saveReservation(reservationController);
+		if (registrationResult) {
+			 result = reservationDao.saveReservation(this.reservationController);
+			 if(result) {
+				 commons.showSuccessMessage(idReservation);
+				 commons.openScreen(event, "/fxml/UserMenu.fxml");
+			 }else {
+				 commons.showErrorMessage();
+			 }
 		}
 	}
 

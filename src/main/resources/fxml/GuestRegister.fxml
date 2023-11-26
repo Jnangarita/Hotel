@@ -46,8 +46,8 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Label>
-            <DatePicker fx:id="dpBirthdate" layoutX="67.0" layoutY="206.0" prefHeight="25.0" prefWidth="246.0" />
-            <ComboBox fx:id="comboNationality" layoutX="66.0" layoutY="265.0" prefHeight="25.0" prefWidth="246.0" />
+            <DatePicker fx:id="dpBirthdate" layoutX="67.0" layoutY="206.0" prefHeight="25.0" prefWidth="246.0" style="-fx-border-color: #2e5acb; -fx-background-color: transparent;" />
+            <ComboBox fx:id="comboNationality" layoutX="66.0" layoutY="265.0" prefHeight="25.0" prefWidth="246.0" style="-fx-background-color: transparent; -fx-border-color: #2e5acb;" />
             <Label layoutX="66.0" layoutY="246.0" text="NACIONALIDAD">
                <font>
                   <Font name="Arial Bold" size="18.0" />
@@ -64,7 +64,7 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtReservationNumber" layoutX="66.0" layoutY="389.0" prefHeight="25.0" prefWidth="246.0" style="-fx-background-color: transparent; -fx-border-color: #2e5acb; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="txtReservationNumber" editable="false" layoutX="66.0" layoutY="389.0" prefHeight="25.0" prefWidth="246.0" style="-fx-background-color: transparent; -fx-border-color: #2e5acb; -fx-border-width: 0px 0px 2px 0px;" />
             <Button fx:id="btnSaveGuestRecord" layoutX="145.0" layoutY="430.0" mnemonicParsing="false" onAction="#saveGuestRecord" style="-fx-background-color: #2e5acb;" text="GUARDAR" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="14.0" />

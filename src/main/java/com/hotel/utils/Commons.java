@@ -32,9 +32,18 @@ public class Commons {
 		}
 	}
 
-    public void clearTextField(TextField... fields) {
-        for (TextField field : fields) {
-            field.clear();
-        }
-    }
+	public void clearTextField(TextField... fields) {
+		for (TextField field : fields) {
+			field.clear();
+		}
+	}
+
+	public void showSuccessMessage(String idReservation) {
+		JOptionPane.showMessageDialog(null, "Se ha registrado correctamente, el código de reserva es: " + idReservation,
+				"Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void showErrorMessage() {
+		JOptionPane.showMessageDialog(null, "Ocurrió un error en la reservación", "Error", JOptionPane.ERROR_MESSAGE);
+	}
 }
