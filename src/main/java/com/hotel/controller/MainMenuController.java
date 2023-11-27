@@ -1,5 +1,6 @@
 package com.hotel.controller;
 
+import com.hotel.enumerations.Routes;
 import com.hotel.utils.Commons;
 
 import javafx.event.ActionEvent;
@@ -23,7 +24,6 @@ public class MainMenuController {
 
 	@FXML
 	void login(ActionEvent event) {
-		String route = "/fxml/Login.fxml";
-		commons.openScreen(event, route);
+		commons.openScreen(event, Routes.LOGIN.getPath());
 	}
 }

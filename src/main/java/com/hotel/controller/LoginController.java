@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import com.hotel.dao.UserDao;
+import com.hotel.enumerations.Routes;
 import com.hotel.exception.KnownExceptions;
 import com.hotel.factory.ConnectionFactory;
 import com.hotel.model.User;
@@ -58,8 +59,7 @@ public class LoginController {
 		String password = util.encryptPassword(txtPassword.getText());
 		User user = userDao.getUser(txtUser.getText(), password);
 		if (user != null) {
-			String route = "/fxml/UserMenu.fxml";
-			commons.openScreen(event, route);
+			commons.openScreen(event, Routes.USER_MENU.getPath());
 		} else {
 			logger.warning("***** Usuario y contraseña inválidos *****");
 			commons.clearTextField(txtUser, txtPassword);
@@ -68,7 +68,6 @@ public class LoginController {
 
 	@FXML
 	void goToRegisterScreen(ActionEvent event) {
-		String route = "/fxml/Register.fxml";
-		commons.openScreen(event, route);
+		commons.openScreen(event, Routes.REGISTER.getPath());
 	}
 }

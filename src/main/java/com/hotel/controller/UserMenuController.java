@@ -2,6 +2,7 @@ package com.hotel.controller;
 
 import javax.swing.JOptionPane;
 
+import com.hotel.enumerations.Routes;
 import com.hotel.utils.Commons;
 
 import javafx.event.ActionEvent;
@@ -23,14 +24,12 @@ public class UserMenuController {
 
     @FXML
     void goToReservationScreen(ActionEvent event) {
-    	String route = "/fxml/Reservation.fxml";
-    	commons.openScreen(event, route);
+    	commons.openScreen(event, Routes.RESERVATION.getPath());
     }
 
     @FXML
     void goToSearchScreen(ActionEvent event) {
-    	String route = "/fxml/SearchSystem.fxml";
-    	commons.openScreen(event, route);
+    	commons.openScreen(event, Routes.GUEST_SEARCH_SYSTEM.getPath());
     }
 
     @FXML
@@ -38,8 +37,7 @@ public class UserMenuController {
 		int answer = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?", "Cerrar sesión",
 				JOptionPane.YES_NO_OPTION);
 		if (answer == JOptionPane.YES_OPTION) {
-			String route = "/fxml/Login.fxml";
-	    	commons.openScreen(event, route);
+	    	commons.openScreen(event, Routes.LOGIN.getPath());
 		}
     }
 }

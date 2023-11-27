@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="750.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controller.ReservationSearchSystemController">
+   <children>
+      <Label layoutX="230.0" layoutY="47.0" text="SISTEMA DE BÚSQUEDA" textFill="#2e5acb">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnSearch" layoutX="621.0" layoutY="122.0" mnemonicParsing="false" onAction="#searchReservation" style="-fx-background-color: #2e5acb;" text="BUSCAR" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtSearch" layoutX="417.0" layoutY="122.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-border-color: #2e5acb; -fx-border-width: 0px 0px 2px 0px;" />
+      <Button fx:id="btnGuest" layoutX="51.0" layoutY="167.0" mnemonicParsing="false" onAction="#goToGuestScreen" style="-fx-background-color: #2e5acb;" text="HUÉSPEDES" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnReservation" layoutX="166.0" layoutY="167.0" mnemonicParsing="false" onAction="#goToReservationScreen" style="-fx-background-color: #2e5acb;" text="RESERVAS" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
+      <TableView fx:id="tableReservation" layoutX="56.0" layoutY="203.0" prefHeight="200.0" prefWidth="641.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+        <columns>
+          <TableColumn prefWidth="124.0" text="Código Reserva" />
+          <TableColumn prefWidth="143.0" text="Fecha Entrada" />
+            <TableColumn prefWidth="130.0" text="Fecha Salida" />
+            <TableColumn prefWidth="117.0" text="Valor" />
+            <TableColumn prefWidth="135.0" text="Forma de Pago" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnEditReservation" layoutX="532.0" layoutY="413.0" mnemonicParsing="false" onAction="#editReservation" style="-fx-background-color: #2e5acb;" text="EDITAR" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDeleteReservation" layoutX="613.0" layoutY="413.0" mnemonicParsing="false" onAction="#deleteReservation" style="-fx-background-color: #2e5acb;" text="ELIMINAR" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

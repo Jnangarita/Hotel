@@ -10,6 +10,7 @@ import java.util.List;
 import com.hotel.dao.GuestRegisterDao;
 import com.hotel.dao.ReservationDao;
 import com.hotel.enumerations.Nationality;
+import com.hotel.enumerations.Routes;
 import com.hotel.exception.KnownExceptions;
 import com.hotel.factory.ConnectionFactory;
 import com.hotel.model.Guest;
@@ -84,7 +85,7 @@ public class GuestRegisterController {
 			 result = reservationDao.saveReservation(this.reservationController);
 			 if(result) {
 				 commons.showSuccessMessage(idReservation);
-				 commons.openScreen(event, "/fxml/UserMenu.fxml");
+				 commons.openScreen(event, Routes.USER_MENU.getPath());
 			 }else {
 				 commons.showErrorMessage();
 			 }

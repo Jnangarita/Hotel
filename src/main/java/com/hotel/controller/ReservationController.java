@@ -9,6 +9,7 @@ import java.util.*;
 import com.hotel.dao.GuestRegisterDao;
 import com.hotel.dao.ReservationDao;
 import com.hotel.enumerations.PaymentMethod;
+import com.hotel.enumerations.Routes;
 import com.hotel.exception.KnownExceptions;
 import com.hotel.factory.ConnectionFactory;
 import com.hotel.model.Reservation;
@@ -69,7 +70,7 @@ public class ReservationController {
 				reservePrice, comboPaymentMethod.getValue().toString());
 		Stage stage = (Stage) btnNext.getScene().getWindow(); // Obtiene el Stage actual
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GuestRegister.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(Routes.GUEST_REGISTER.getPath()));
 			Parent root = loader.load();
 			GuestRegisterController controller = loader.getController();
 			controller.setReservationController(reservation);
