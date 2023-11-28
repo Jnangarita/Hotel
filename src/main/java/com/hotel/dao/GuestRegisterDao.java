@@ -1,6 +1,8 @@
 package com.hotel.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.hotel.exception.UnknownExceptions;
@@ -33,7 +35,7 @@ public class GuestRegisterDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new UnknownExceptions(
-					"Ocurrió un error al tratar de obtener el número de filas de la tabla huespedes");
+					"Ocurrió un error al tratar de obtener el número de filas de la tabla huéspedes");
 		}
 	}
 
@@ -49,7 +51,7 @@ public class GuestRegisterDao {
 			return registrationResult;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new UnknownExceptions("Ocurrió un error al tratar de registrar la reserva");
+			throw new UnknownExceptions("Ocurrió un error al tratar de registrar al huésped");
 		}
 	}
 
@@ -67,14 +69,64 @@ public class GuestRegisterDao {
 			try (resultSet) {
 				while (resultSet.next()) {
 					guest.setId(resultSet.getInt(1));
-					logger.info("***** El huésped se ha registrado correctamente *****");
 					registrationResult = true;
+					logger.info("***** El huésped se ha registrado correctamente *****");
 				}
 			}
 			return registrationResult;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new UnknownExceptions("Ocurrió un error al tratar de registrar el huésped");
+		}
+	}
+
+	public List<Guest> guestList() {
+		List<Guest> result = new ArrayList<>();
+		try {
+			String querySelect = "SELECT * FROM huespedes";
+			final PreparedStatement statement = con.prepareStatement(querySelect);
+			try (statement) {
+				statement.execute();
+				ResultSet resultSet = statement.getResultSet();
+				try (resultSet) {
+					while (resultSet.next()) {
+						Guest guest = new Guest(resultSet.getInt("id"), resultSet.getString("nombre"),
+								resultSet.getString("apellido"), resultSet.getDate("fecha_de_nacimiento"),
+								resultSet.getString("nacionalidad"), resultSet.getString("telefono"),
+								resultSet.getString("id_reserva"));
+						result.add(guest);
+					}
+					logger.info("***** Datos de la tabla huespedes *****");
+				}
+			}
+			return result;
+		} catch (SQLException e) {
+			throw new UnknownExceptions("Ocurrió un error al tratar de obtener los datos de la tabla huespedes");
+		}
+	}
+
+	public List<Guest> searchGuest(String lastName) {
+		List<Guest> result = new ArrayList<>();
+		try {
+			String querySelect = "SELECT * FROM huespedes WHERE apellido = ?";
+			final PreparedStatement statement = con.prepareStatement(querySelect);
+			try (statement) {
+				statement.setString(1, lastName);
+				statement.execute();
+				ResultSet resultSet = statement.getResultSet();
+				try (resultSet) {
+					while (resultSet.next()) {
+						Guest guest = new Guest(resultSet.getString("nombre"), resultSet.getString("apellido"),
+								resultSet.getDate("fecha_de_nacimiento"), resultSet.getString("nacionalidad"),
+								resultSet.getString("telefono"), resultSet.getString("id_reserva"));
+						result.add(guest);
+					}
+					logger.info("***** Datos de los huéspedes encontrados *****");
+				}
+			}
+			return result;
+		} catch (SQLException e) {
+			throw new UnknownExceptions("Ocurrió un error al tratar de buscar en la tabla huespedes");
 		}
 	}
 }

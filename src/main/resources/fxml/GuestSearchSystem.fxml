@@ -31,14 +31,14 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
-      <TableView fx:id="tableGuest" layoutX="56.0" layoutY="203.0" prefHeight="200.0" prefWidth="641.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+      <TableView fx:id="tableGuest" editable="true" layoutX="56.0" layoutY="203.0" prefHeight="200.0" prefWidth="641.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
         <columns>
-          <TableColumn prefWidth="101.0" text="Nombre" />
-          <TableColumn prefWidth="99.0" text="Apellido" />
-            <TableColumn prefWidth="138.0" text="Fecha de nacimiento" />
-            <TableColumn prefWidth="98.0" text="Nacionalidad" />
-            <TableColumn prefWidth="101.0" text="Teléfono" />
-            <TableColumn prefWidth="112.0" text="Código Reserva" />
+          <TableColumn fx:id="columnName" prefWidth="101.0" text="Nombre" />
+          <TableColumn fx:id="columnLastName" prefWidth="99.0" text="Apellido" />
+            <TableColumn fx:id="columnBirthdate" prefWidth="138.0" text="Fecha de nacimiento" />
+            <TableColumn fx:id="columnNationality" prefWidth="98.0" text="Nacionalidad" />
+            <TableColumn fx:id="columnPhone" prefWidth="101.0" text="Teléfono" />
+            <TableColumn fx:id="columnReservationCode" prefWidth="112.0" text="Código Reserva" />
         </columns>
       </TableView>
       <Button fx:id="btnEditGuest" layoutX="532.0" layoutY="413.0" mnemonicParsing="false" onAction="#editGuest" style="-fx-background-color: #2e5acb;" text="EDITAR" textFill="WHITE">

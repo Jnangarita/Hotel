@@ -82,13 +82,13 @@ public class GuestRegisterController {
 		Guest guest = new Guest(name, lastName, birthdate, nationality, phone, idReservation);
 		registrationResult = guestRegisterDao.saveGuest(guest);
 		if (registrationResult) {
-			 result = reservationDao.saveReservation(this.reservationController);
-			 if(result) {
-				 commons.showSuccessMessage(idReservation);
-				 commons.openScreen(event, Routes.USER_MENU.getPath());
-			 }else {
-				 commons.showErrorMessage();
-			 }
+			result = reservationDao.saveReservation(this.reservationController);
+			if (result) {
+				commons.showSuccessMessage(idReservation);
+				commons.openScreen(event, Routes.USER_MENU.getPath());
+			} else {
+				commons.showErrorMessage();
+			}
 		}
 	}
 
