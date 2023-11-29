@@ -18,6 +18,16 @@ public class Reservation {
 		this.paymentMethod = paymentMethod;
 	}
 
+	public Reservation(int id, String idReservation, Date dateCheckIn, Date dateCheckOut, Double price,
+			String paymentMethod) {
+		this.id = id;
+		this.idReservation = idReservation;
+		this.dateCheckIn = dateCheckIn;
+		this.dateCheckOut = dateCheckOut;
+		this.price = price;
+		this.paymentMethod = paymentMethod;
+	}
+
 	public int getId() {
 		return this.id;
 	}

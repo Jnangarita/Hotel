@@ -1,6 +1,8 @@
 package com.hotel.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.hotel.exception.UnknownExceptions;
@@ -27,7 +29,7 @@ public class ReservationDao {
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new UnknownExceptions("Ocurrió un error al tratar de registrar la reserva");
+			throw new UnknownExceptions("Ocurrió un error al tratar de registrar la reserva.");
 		}
 	}
 
@@ -44,14 +46,73 @@ public class ReservationDao {
 			try (resultSet) {
 				while (resultSet.next()) {
 					reservation.setId(resultSet.getInt(1));
-					logger.info("***** La reservación se ha registrado correctamente *****");
+					logger.info("***** La reservación se ha registrado correctamente. *****");
 					result = true;
 				}
 			}
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new UnknownExceptions("Ocurrió un error al tratar de registrar la reserva");
+			throw new UnknownExceptions("Ocurrió un error al tratar de registrar la reserva.");
+		}
+	}
+
+	public List<Reservation> reservationList() {
+		List<Reservation> result = new ArrayList<>();
+		try {
+			String querySelect = "SELECT * FROM reservas";
+			final PreparedStatement statement = con.prepareStatement(querySelect);
+			try (statement) {
+				statement.execute();
+				ResultSet resultSet = statement.getResultSet();
+				try (resultSet) {
+					while (resultSet.next()) {
+						Reservation reservation = new Reservation(resultSet.getInt("id"),
+								resultSet.getString("id_reserva"), resultSet.getDate("fecha_entrada"),
+								resultSet.getDate("fecha_salida"), resultSet.getDouble("valor"),
+								resultSet.getString("forma_pago"));
+						result.add(reservation);
+					}
+					if (!result.isEmpty()) {
+						logger.info("***** ¡Consulta exitosa! Tabla: reservas *****");
+					} else {
+						logger.warning("***** Error en la consulta. Tabla: reservas *****");
+					}
+				}
+			}
+			return result;
+		} catch (SQLException e) {
+			throw new UnknownExceptions("Ocurrió un error al tratar de obtener los datos de la tabla reservas.");
+		}
+	}
+
+	public List<Reservation> searchReservation(String idReservation) {
+		List<Reservation> result = new ArrayList<>();
+		try {
+			String querySelect = "SELECT * FROM reservas WHERE id_reserva = ?";
+			final PreparedStatement statement = con.prepareStatement(querySelect);
+			try (statement) {
+				statement.setString(1, idReservation);
+				statement.execute();
+				ResultSet resultSet = statement.getResultSet();
+				try (resultSet) {
+					while (resultSet.next()) {
+						Reservation reservation = new Reservation(resultSet.getString("id_reserva"),
+								resultSet.getDate("fecha_entrada"), resultSet.getDate("fecha_salida"),
+								resultSet.getDouble("valor"), resultSet.getString("forma_pago"));
+						result.add(reservation);
+					}
+					if (!result.isEmpty()) {
+						logger.info("***** ¡Búsqueda exitosa! Se encontraron resultados en la tabla reservas. *****");
+					} else {
+						logger.warning(
+								"***** No se encontraron resultados para la búsqueda en la tabla reservas. *****");
+					}
+				}
+			}
+			return result;
+		} catch (SQLException e) {
+			throw new UnknownExceptions("Ocurrió un error al tratar de buscar en la tabla reservas.");
 		}
 	}
 }

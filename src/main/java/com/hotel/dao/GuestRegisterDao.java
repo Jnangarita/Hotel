@@ -96,7 +96,11 @@ public class GuestRegisterDao {
 								resultSet.getString("id_reserva"));
 						result.add(guest);
 					}
-					logger.info("***** Datos de la tabla huespedes *****");
+					if (!result.isEmpty()) {
+						logger.info("***** ¡Consulta exitosa! Tabla: huespedes *****");
+					} else {
+						logger.warning("***** Error en la consulta. Tabla: huespedes *****");
+					}
 				}
 			}
 			return result;
@@ -121,7 +125,12 @@ public class GuestRegisterDao {
 								resultSet.getString("telefono"), resultSet.getString("id_reserva"));
 						result.add(guest);
 					}
-					logger.info("***** Datos de los huéspedes encontrados *****");
+					if (!result.isEmpty()) {
+						logger.info("***** ¡Búsqueda exitosa! Se encontraron resultados en la tabla huespedes. *****");
+					} else {
+						logger.warning(
+								"***** No se encontraron resultados para la búsqueda en la tabla huespedes. *****");
+					}
 				}
 			}
 			return result;

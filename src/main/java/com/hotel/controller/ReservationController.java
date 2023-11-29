@@ -46,11 +46,11 @@ public class ReservationController {
 
 	Util util = new Util();
 
-    public ReservationController() throws IOException, SQLException {
+	public ReservationController() throws IOException, SQLException {
 		var factory = new ConnectionFactory();
 		this.reservationDao = new ReservationDao(factory.createConnection());
 		this.guestRegisterDao = new GuestRegisterDao(factory.createConnection());
-    }
+	}
 
 	@FXML
 	void saveReservation(ActionEvent event) {

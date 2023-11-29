@@ -33,11 +33,11 @@
       </Button>
       <TableView fx:id="tableReservation" layoutX="56.0" layoutY="203.0" prefHeight="200.0" prefWidth="641.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
         <columns>
-          <TableColumn prefWidth="124.0" text="Código Reserva" />
-          <TableColumn prefWidth="143.0" text="Fecha Entrada" />
-            <TableColumn prefWidth="130.0" text="Fecha Salida" />
-            <TableColumn prefWidth="117.0" text="Valor" />
-            <TableColumn prefWidth="135.0" text="Forma de Pago" />
+          <TableColumn fx:id="columnReservationCode" prefWidth="124.0" text="Código Reserva" />
+          <TableColumn fx:id="columnDateCheckIn" prefWidth="143.0" text="Fecha Entrada" />
+            <TableColumn fx:id="columnDateCheckOut" prefWidth="130.0" text="Fecha Salida" />
+            <TableColumn fx:id="columnPrice" prefWidth="117.0" text="Valor" />
+            <TableColumn fx:id="columnPaymentMethod" prefWidth="135.0" text="Forma de Pago" />
         </columns>
       </TableView>
       <Button fx:id="btnEditReservation" layoutX="532.0" layoutY="413.0" mnemonicParsing="false" onAction="#editReservation" style="-fx-background-color: #2e5acb;" text="EDITAR" textFill="WHITE">
