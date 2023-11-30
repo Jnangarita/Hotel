@@ -31,6 +31,15 @@ public class Guest {
 		this.idReservation = idReservation;
 	}
 
+	public Guest(int id, String name, String lastName, Date birthdate, String nationality, String phone) {
+		this.id = id;
+		this.name = name;
+		this.lastName = lastName;
+		this.birthdate = birthdate;
+		this.nationality = nationality;
+		this.phone = phone;
+	}
+
 	public int getId() {
 		return this.id;
 	}

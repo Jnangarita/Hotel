@@ -46,4 +46,13 @@ public class Commons {
 	public void showErrorMessage() {
 		JOptionPane.showMessageDialog(null, "Ocurrió un error en la reservación", "Error", JOptionPane.ERROR_MESSAGE);
 	}
+
+	public void showMessageEditSuccessful() {
+		JOptionPane.showMessageDialog(null, "Se ha actualizado correctamente", "Actualización exitosa",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void showMessageEditError() {
+		JOptionPane.showMessageDialog(null, "Ocurrió un error en la actualización", "Error", JOptionPane.ERROR_MESSAGE);
+	}
 }

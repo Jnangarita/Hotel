@@ -138,4 +138,23 @@ public class GuestRegisterDao {
 			throw new UnknownExceptions("Ocurrió un error al tratar de buscar en la tabla huespedes");
 		}
 	}
+
+	public int editGuest(Guest guest) {
+		String queryUpdate = "UPDATE huespedes SET nombre = ?, apellido = ?, fecha_de_nacimiento = ?, nacionalidad = ?, telefono = ? WHERE id = ?";
+		try {
+			PreparedStatement statement = con.prepareStatement(queryUpdate);
+			try (statement) {
+				statement.setString(1, guest.getName());
+				statement.setString(2, guest.getLastName());
+				statement.setDate(3, guest.getBirthdate());
+				statement.setString(4, guest.getNationality());
+				statement.setString(5, guest.getPhone());
+				statement.setInt(6, guest.getId());
+				statement.execute();
+				return statement.getUpdateCount();
+			}
+		} catch (SQLException e) {
+			throw new UnknownExceptions("Ocurrió un error al tratar de editar el huésped");
+		}
+	}
 }
