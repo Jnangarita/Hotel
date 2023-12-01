@@ -28,6 +28,14 @@ public class Reservation {
 		this.paymentMethod = paymentMethod;
 	}
 
+	public Reservation(int id, Date dateCheckIn, Date dateCheckOut, Double price, String paymentMethod) {
+		this.id = id;
+		this.dateCheckIn = dateCheckIn;
+		this.dateCheckOut = dateCheckOut;
+		this.price = price;
+		this.paymentMethod = paymentMethod;
+	}
+
 	public int getId() {
 		return this.id;
 	}

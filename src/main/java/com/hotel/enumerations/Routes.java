@@ -8,7 +8,8 @@ public enum Routes {
 	LOGIN("/fxml/Login.fxml"),
 	GUEST_REGISTER("/fxml/GuestRegister.fxml"),
 	RESERVATION("/fxml/Reservation.fxml"),
-	EDIT_GUEST("/fxml/EditGuest.fxml");
+	EDIT_GUEST("/fxml/EditGuest.fxml"),
+	EDIT_RESERVATION("/fxml/EditReservation.fxml");
 
 	private final String path;
 

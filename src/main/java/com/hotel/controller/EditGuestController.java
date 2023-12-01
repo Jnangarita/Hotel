@@ -3,9 +3,9 @@ package com.hotel.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.hotel.dao.GuestRegisterDao;
 import com.hotel.enumerations.Nationality;
@@ -52,6 +52,8 @@ public class EditGuestController {
 
 	Commons commons = new Commons();
 
+	private static final Logger logger = Logger.getLogger(EditGuestController.class.getName());
+
 	public EditGuestController() throws IOException, SQLException {
 		var factory = new ConnectionFactory();
 		this.guestRegisterDao = new GuestRegisterDao(factory.createConnection());
@@ -64,8 +66,7 @@ public class EditGuestController {
 				|| comboNationality.getValue().toString().isEmpty() || txtPhone.getText().isEmpty()) {
 			throw new KnownExceptions("Los campos no pueden ser vacíos");
 		}
-		LocalDate date = dpBirthdate.getValue();
-		Date birthdate = Date.valueOf(date);
+		Date birthdate = Date.valueOf(dpBirthdate.getValue());
 		Guest guest = new Guest(this.guestController.getId(), txtName.getText(), txtLastName.getText(), birthdate,
 				comboNationality.getValue().toString(), txtPhone.getText());
 		result = guestRegisterDao.editGuest(guest);
@@ -82,21 +83,19 @@ public class EditGuestController {
 		try {
 			txtName.setText(guest.getName());
 			txtLastName.setText(guest.getLastName());
-			Date date = guest.getBirthdate();
-			LocalDate localDate = date.toLocalDate();
-			dpBirthdate.setValue(localDate);
-			comboNationality.setValue(Nationality.valueOf(guest.getNationality()));
+			dpBirthdate.setValue(guest.getBirthdate().toLocalDate());
 			txtPhone.setText(guest.getPhone());
 			txtReservationNumber.setText(guest.getIdReservation());
+			comboNationality.setValue(Nationality.valueOf(guest.getNationality()));
 		} catch (IllegalArgumentException e) {
-			throw new KnownExceptions(
+			logger.warning(
 					"La nacionalidad proporcionada no coincide con los valores válidos. Asegúrate de seleccionar una nacionalidad válida de la lista proporcionada");
 		}
 	}
 
 	@FXML
 	void initialize() {
-		List<Nationality> listPaymentMethods = Arrays.asList(Nationality.values());
-		comboNationality.getItems().addAll(listPaymentMethods);
+		List<Nationality> listNationality = Arrays.asList(Nationality.values());
+		comboNationality.getItems().addAll(listNationality);
 	}
 }

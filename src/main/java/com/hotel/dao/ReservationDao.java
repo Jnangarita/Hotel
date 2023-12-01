@@ -115,4 +115,22 @@ public class ReservationDao {
 			throw new UnknownExceptions("Ocurrió un error al tratar de buscar en la tabla reservas.");
 		}
 	}
+
+	public int editReservation(Reservation reservation) {
+		String queryUpdate = "UPDATE reservas SET fecha_entrada = ?, fecha_salida = ?, valor = ?, forma_pago = ? WHERE id = ?";
+		try {
+			PreparedStatement statement = con.prepareStatement(queryUpdate);
+			try (statement) {
+				statement.setDate(1, reservation.getDateCheckIn());
+				statement.setDate(2, reservation.getDateCheckOut());
+				statement.setDouble(3, reservation.getPrice());
+				statement.setString(4, reservation.getPaymentMethod());
+				statement.setInt(5, reservation.getId());
+				statement.execute();
+				return statement.getUpdateCount();
+			}
+		} catch (SQLException e) {
+			throw new UnknownExceptions("Ocurrió un error al tratar de editar la reservación");
+		}
+	}
 }

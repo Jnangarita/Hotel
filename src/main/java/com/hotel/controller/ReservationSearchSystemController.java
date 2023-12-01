@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import com.hotel.dao.ReservationDao;
 import com.hotel.enumerations.Routes;
 import com.hotel.exception.KnownExceptions;
+import com.hotel.exception.UnknownExceptions;
 import com.hotel.factory.ConnectionFactory;
 import com.hotel.model.Reservation;
 import com.hotel.utils.Commons;
@@ -15,11 +16,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class ReservationSearchSystemController {
 
@@ -82,6 +87,22 @@ public class ReservationSearchSystemController {
 
 	@FXML
 	void editReservation(ActionEvent event) {
+		Reservation reservation = tableReservation.getSelectionModel().getSelectedItem();
+		if (reservation == null) {
+			throw new KnownExceptions(
+					"No se ha seleccionado ninguna reservación. Por favor, elija una reservación antes de continuar.");
+		}
+		try {
+			Stage stage = (Stage) btnEditReservation.getScene().getWindow();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(Routes.EDIT_RESERVATION.getPath()));
+			Parent root = loader.load();
+			EditReservationController controller = loader.getController();
+			controller.setReservation(reservation);
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+		} catch (IOException e) {
+			throw new UnknownExceptions("Ocurrió un error al tratar de actualizar la información de la reservación");
+		}
 	}
 
 	@FXML
