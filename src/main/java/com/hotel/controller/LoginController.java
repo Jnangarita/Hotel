@@ -1,13 +1,10 @@
 package com.hotel.controller;
 
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import com.hotel.dao.UserDao;
 import com.hotel.enumerations.Routes;
-import com.hotel.exception.KnownExceptions;
 import com.hotel.factory.ConnectionFactory;
 import com.hotel.model.User;
 import com.hotel.utils.Commons;
@@ -41,7 +38,7 @@ public class LoginController {
 
 	private static final Logger logger = Logger.getLogger(LoginController.class.getName());
 
-	public LoginController() throws IOException, SQLException {
+	public LoginController() {
 		var factory = new ConnectionFactory();
 		this.userDao = new UserDao(factory.createConnection());
 	}
@@ -54,13 +51,15 @@ public class LoginController {
 	@FXML
 	void goToMainScreen(ActionEvent event) throws NoSuchAlgorithmException {
 		if (txtUser.getText().isEmpty() || txtPassword.getText().isEmpty()) {
-			throw new KnownExceptions("Los campos no pueden ser vacíos");
+			commons.showNotificationEmptyField();
+			return;
 		}
 		String password = util.encryptPassword(txtPassword.getText());
 		User user = userDao.getUser(txtUser.getText(), password);
 		if (user != null) {
 			commons.openScreen(event, Routes.USER_MENU.getPath());
 		} else {
+			commons.showInvalidUserMessage();
 			logger.warning("***** Usuario y contraseña inválidos *****");
 			commons.clearTextField(txtUser, txtPassword);
 		}

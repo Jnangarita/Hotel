@@ -2,7 +2,6 @@ package com.hotel.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 
 import com.hotel.dao.ReservationDao;
 import com.hotel.enumerations.Routes;
@@ -72,7 +71,7 @@ public class ReservationSearchSystemController {
 
 	public static final String PARAMETERIZED_LIST = "reservationResult";
 
-	public ReservationSearchSystemController() throws IOException, SQLException {
+	public ReservationSearchSystemController() {
 		var factory = new ConnectionFactory();
 		this.reservationDao = new ReservationDao(factory.createConnection());
 	}
@@ -119,10 +118,6 @@ public class ReservationSearchSystemController {
 	@FXML
 	void goToGuestScreen(ActionEvent event) {
 		commons.openScreen(event, Routes.GUEST_SEARCH_SYSTEM.getPath());
-	}
-
-	@FXML
-	void goToReservationScreen(ActionEvent event) {
 	}
 
 	@FXML

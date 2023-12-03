@@ -1,8 +1,6 @@
 package com.hotel.controller;
 
-import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +9,6 @@ import com.hotel.dao.GuestRegisterDao;
 import com.hotel.dao.ReservationDao;
 import com.hotel.enumerations.Nationality;
 import com.hotel.enumerations.Routes;
-import com.hotel.exception.KnownExceptions;
 import com.hotel.factory.ConnectionFactory;
 import com.hotel.model.Guest;
 import com.hotel.model.Reservation;
@@ -58,7 +55,7 @@ public class GuestRegisterController {
 		txtReservationNumber.setText(this.reservationController.getIdReservation());
 	}
 
-	public GuestRegisterController() throws IOException, SQLException {
+	public GuestRegisterController() {
 		var factory = new ConnectionFactory();
 		this.reservationDao = new ReservationDao(factory.createConnection());
 		this.guestRegisterDao = new GuestRegisterDao(factory.createConnection());
@@ -70,7 +67,8 @@ public class GuestRegisterController {
 		boolean result = false;
 		if (txtName.getText().isEmpty() || txtLastName.getText().isEmpty() || dpBirthdate.getValue() == null
 				|| comboNationality.getValue().toString().isEmpty() || txtPhone.getText().isEmpty()) {
-			throw new KnownExceptions("Los campos no pueden ser vacíos");
+			commons.showNotificationEmptyField();
+			return;
 		}
 		String name = txtName.getText();
 		String lastName = txtLastName.getText();

@@ -1,8 +1,6 @@
 package com.hotel.controller;
 
-import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
@@ -54,7 +52,7 @@ public class EditGuestController {
 
 	private static final Logger logger = Logger.getLogger(EditGuestController.class.getName());
 
-	public EditGuestController() throws IOException, SQLException {
+	public EditGuestController() {
 		var factory = new ConnectionFactory();
 		this.guestRegisterDao = new GuestRegisterDao(factory.createConnection());
 	}

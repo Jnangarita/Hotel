@@ -1,11 +1,8 @@
 package com.hotel.controller;
 
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 
 import com.hotel.dao.UserDao;
-import com.hotel.exception.KnownExceptions;
 import com.hotel.factory.ConnectionFactory;
 import com.hotel.model.User;
 import com.hotel.utils.*;
@@ -36,7 +33,7 @@ public class RegisterController {
 
 	Util util = new Util();
 
-	public RegisterController() throws IOException, SQLException {
+	public RegisterController() {
 		var factory = new ConnectionFactory();
 		this.userDao = new UserDao(factory.createConnection());
 	}
@@ -50,7 +47,8 @@ public class RegisterController {
 	public void saveNewUser(ActionEvent event) {
 		try {
 			if(txtPassword.getText().isEmpty() || txtConfirmPassword.getText().isEmpty()) {
-				throw new KnownExceptions("Los campos no pueden ser vacíos");
+				commons.showNotificationEmptyField();
+				return;
 			}
 			String password = util.encryptPassword(txtPassword.getText());
 			String confirmPassword = util.encryptPassword(txtConfirmPassword.getText());

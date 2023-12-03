@@ -26,7 +26,7 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnReservation" layoutX="166.0" layoutY="167.0" mnemonicParsing="false" onAction="#goToReservationScreen" style="-fx-background-color: #2e5acb;" text="RESERVAS" textFill="WHITE">
+      <Button fx:id="btnReservation" layoutX="166.0" layoutY="167.0" mnemonicParsing="false" style="-fx-background-color: #2e5acb;" text="RESERVAS" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>

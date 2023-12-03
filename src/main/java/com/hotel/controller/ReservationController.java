@@ -2,7 +2,6 @@ package com.hotel.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -13,6 +12,7 @@ import com.hotel.enumerations.Routes;
 import com.hotel.exception.KnownExceptions;
 import com.hotel.factory.ConnectionFactory;
 import com.hotel.model.Reservation;
+import com.hotel.utils.Commons;
 import com.hotel.utils.Util;
 
 import javafx.event.ActionEvent;
@@ -46,7 +46,9 @@ public class ReservationController {
 
 	Util util = new Util();
 
-	public ReservationController() throws IOException, SQLException {
+	Commons commons = new Commons();
+
+	public ReservationController() {
 		var factory = new ConnectionFactory();
 		this.reservationDao = new ReservationDao(factory.createConnection());
 		this.guestRegisterDao = new GuestRegisterDao(factory.createConnection());
@@ -56,7 +58,8 @@ public class ReservationController {
 	void saveReservation(ActionEvent event) {
 		if (comboPaymentMethod.getValue() == null || dpDateCheckIn.getValue() == null
 				|| dpDateCheckOut.getValue() == null || txtReservationPrice.getText().isEmpty()) {
-			throw new KnownExceptions("Los campos no pueden ser vacíos");
+			commons.showNotificationEmptyField();
+			return;
 		}
 
 		String idReservation = util.generateGuestId(guestRegisterDao.getNumberOfGuestRows());

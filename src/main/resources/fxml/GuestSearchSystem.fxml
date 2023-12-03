@@ -21,7 +21,7 @@
          </font>
       </Button>
       <TextField fx:id="txtSearch" layoutX="417.0" layoutY="122.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-border-color: #2e5acb; -fx-border-width: 0px 0px 2px 0px;" />
-      <Button fx:id="btnGuest" layoutX="51.0" layoutY="167.0" mnemonicParsing="false" onAction="#goToGuestScreen" style="-fx-background-color: #2e5acb;" text="HUÉSPEDES" textFill="WHITE">
+      <Button fx:id="btnGuest" layoutX="51.0" layoutY="167.0" mnemonicParsing="false" style="-fx-background-color: #2e5acb;" text="HUÉSPEDES" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>

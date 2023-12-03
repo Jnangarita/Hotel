@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class Commons {
+	public static final String ERROR_TITLE = "Error";
+
 	public void openScreen(ActionEvent event, String route) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource(route));
@@ -44,7 +46,8 @@ public class Commons {
 	}
 
 	public void showErrorMessage() {
-		JOptionPane.showMessageDialog(null, "Ocurrió un error en la reservación", "Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Ocurrió un error en la reservación", ERROR_TITLE,
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void showMessageEditSuccessful() {
@@ -53,7 +56,8 @@ public class Commons {
 	}
 
 	public void showMessageEditError() {
-		JOptionPane.showMessageDialog(null, "Ocurrió un error en la actualización", "Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Ocurrió un error en la actualización", ERROR_TITLE,
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void showMessageDeleteSuccessful() {
@@ -62,7 +66,17 @@ public class Commons {
 	}
 
 	public void showMessageDeleteError() {
-		JOptionPane.showMessageDialog(null, "Ocurrió un error al eliminar el registro", "Error",
+		JOptionPane.showMessageDialog(null, "Ocurrió un error al eliminar el registro", ERROR_TITLE,
 				JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void showNotificationEmptyField() {
+		JOptionPane.showMessageDialog(null, "Los campos no pueden ser vacíos", "Campos Vacíos",
+				JOptionPane.WARNING_MESSAGE);
+	}
+
+	public void showInvalidUserMessage() {
+		JOptionPane.showMessageDialog(null, "Usuario y contraseña inválidos", "Usuario Invalido",
+				JOptionPane.WARNING_MESSAGE);
 	}
 }

@@ -2,7 +2,6 @@ package com.hotel.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 
 import com.hotel.dao.GuestRegisterDao;
 import com.hotel.enumerations.Routes;
@@ -75,7 +74,7 @@ public class GuestSearchSystemController {
 
 	public static final String PARAMETERIZED_LIST = "guestResult";
 
-	public GuestSearchSystemController() throws IOException, SQLException {
+	public GuestSearchSystemController() {
 		var factory = new ConnectionFactory();
 		this.guestRegisterDao = new GuestRegisterDao(factory.createConnection());
 	}
@@ -117,10 +116,6 @@ public class GuestSearchSystemController {
 		} catch (IOException e) {
 			throw new UnknownExceptions("Ocurrió un error al tratar de actualizar la información del huésped");
 		}
-	}
-
-	@FXML
-	void goToGuestScreen(ActionEvent event) {
 	}
 
 	@FXML

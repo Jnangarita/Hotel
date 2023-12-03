@@ -9,7 +9,8 @@ public enum Routes {
 	GUEST_REGISTER("/fxml/GuestRegister.fxml"),
 	RESERVATION("/fxml/Reservation.fxml"),
 	EDIT_GUEST("/fxml/EditGuest.fxml"),
-	EDIT_RESERVATION("/fxml/EditReservation.fxml");
+	EDIT_RESERVATION("/fxml/EditReservation.fxml"),
+	CONFIG_PROPERTIES("/config.properties");
 
 	private final String path;
 
