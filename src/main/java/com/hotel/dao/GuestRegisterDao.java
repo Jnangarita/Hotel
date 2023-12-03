@@ -99,7 +99,7 @@ public class GuestRegisterDao {
 					if (!result.isEmpty()) {
 						logger.info("***** ¡Consulta exitosa! Tabla: huespedes *****");
 					} else {
-						logger.warning("***** Error en la consulta. Tabla: huespedes *****");
+						logger.warning("***** Tabla: huespedes no tiene datos *****");
 					}
 				}
 			}
@@ -155,6 +155,20 @@ public class GuestRegisterDao {
 			}
 		} catch (SQLException e) {
 			throw new UnknownExceptions("Ocurrió un error al tratar de editar el huésped");
+		}
+	}
+
+	public int deleteGuest(int id) {
+		String queryDelete = "DELETE FROM huespedes WHERE id = ?";
+		try {
+			final PreparedStatement statement = con.prepareStatement(queryDelete);
+			try (statement) {
+				statement.setInt(1, id);
+				statement.execute();
+				return statement.getUpdateCount();
+			}
+		} catch (SQLException e) {
+			throw new UnknownExceptions("Ocurrió un error al tratar de eliminar el huésped" + e);
 		}
 	}
 }

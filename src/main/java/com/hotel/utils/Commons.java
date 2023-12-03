@@ -55,4 +55,14 @@ public class Commons {
 	public void showMessageEditError() {
 		JOptionPane.showMessageDialog(null, "Ocurrió un error en la actualización", "Error", JOptionPane.ERROR_MESSAGE);
 	}
+
+	public void showMessageDeleteSuccessful() {
+		JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente", "Eliminar",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void showMessageDeleteError() {
+		JOptionPane.showMessageDialog(null, "Ocurrió un error al eliminar el registro", "Error",
+				JOptionPane.ERROR_MESSAGE);
+	}
 }

@@ -86,6 +86,17 @@ public class GuestSearchSystemController {
 
 	@FXML
 	void deleteGuest(ActionEvent event) {
+		int result = 0;
+		Guest guest = tableGuest.getSelectionModel().getSelectedItem();
+		if (guest != null) {
+			result = guestRegisterDao.deleteGuest(guest.getId());
+		}
+		if (result > 0) {
+			commons.showMessageDeleteSuccessful();
+			listGuests(GENERAL_LIST);
+		} else {
+			commons.showMessageDeleteError();
+		}
 	}
 
 	@FXML

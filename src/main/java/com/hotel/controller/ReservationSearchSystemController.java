@@ -83,6 +83,17 @@ public class ReservationSearchSystemController {
 
 	@FXML
 	void deleteReservation(ActionEvent event) {
+		int result = 0;
+		Reservation reservation = tableReservation.getSelectionModel().getSelectedItem();
+		if (reservation != null) {
+			result = reservationDao.deleteReservation(reservation.getId());
+		}
+		if (result > 0) {
+			commons.showMessageDeleteSuccessful();
+			listReservations(GENERAL_LIST);
+		} else {
+			commons.showMessageDeleteError();
+		}
 	}
 
 	@FXML

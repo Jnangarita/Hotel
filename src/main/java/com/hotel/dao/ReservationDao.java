@@ -76,7 +76,7 @@ public class ReservationDao {
 					if (!result.isEmpty()) {
 						logger.info("***** ¡Consulta exitosa! Tabla: reservas *****");
 					} else {
-						logger.warning("***** Error en la consulta. Tabla: reservas *****");
+						logger.warning("***** Tabla: reservas no tiene datos *****");
 					}
 				}
 			}
@@ -131,6 +131,20 @@ public class ReservationDao {
 			}
 		} catch (SQLException e) {
 			throw new UnknownExceptions("Ocurrió un error al tratar de editar la reservación");
+		}
+	}
+
+	public int deleteReservation(int id) {
+		String queryDelete = "DELETE FROM reservas WHERE id = ?";
+		try {
+			final PreparedStatement statement = con.prepareStatement(queryDelete);
+			try (statement) {
+				statement.setInt(1, id);
+				statement.execute();
+				return statement.getUpdateCount();
+			}
+		} catch (SQLException e) {
+			throw new UnknownExceptions("Ocurrió un error al tratar de eliminar la reservación " + e);
 		}
 	}
 }

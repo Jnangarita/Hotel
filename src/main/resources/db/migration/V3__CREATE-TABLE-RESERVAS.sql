@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS reservas (
   valor DOUBLE NOT NULL,
   forma_pago VARCHAR(30) NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT reservarHabitacion
+  CONSTRAINT reserva
     FOREIGN KEY (id_reserva)
-    REFERENCES huespedes (id_reserva))
+    REFERENCES huespedes (id_reserva)
+    ON DELETE CASCADE)
 ENGINE = InnoDB
