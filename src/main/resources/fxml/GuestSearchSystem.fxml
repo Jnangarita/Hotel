@@ -51,5 +51,10 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
+      <Button fx:id="btnCloseGuestSearchSystemScreen" layoutX="722.0" mnemonicParsing="false" onAction="#closeGuestSearchSystemScreen" style="-fx-background-color: transparent;" text="X" textFill="#2e5acb">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

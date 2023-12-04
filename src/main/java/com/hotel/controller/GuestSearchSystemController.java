@@ -37,6 +37,9 @@ public class GuestSearchSystemController {
 	private Button btnGuest;
 
 	@FXML
+	private Button btnCloseGuestSearchSystemScreen;
+
+	@FXML
 	private Button btnReservation;
 
 	@FXML
@@ -81,6 +84,11 @@ public class GuestSearchSystemController {
 
 	public void initialize() {
 		listGuests(GENERAL_LIST);
+	}
+
+	@FXML
+	void closeGuestSearchSystemScreen(ActionEvent event) {
+		commons.openScreen(event, Routes.USER_MENU.getPath());
 	}
 
 	@FXML

@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import com.hotel.dao.GuestRegisterDao;
 import com.hotel.dao.ReservationDao;
 import com.hotel.enumerations.Nationality;
@@ -19,6 +21,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class GuestRegisterController {
+
+	@FXML
+	private Button btnCloseGuestScreen;
 
 	@FXML
 	private Button btnSaveGuestRecord;
@@ -59,6 +64,15 @@ public class GuestRegisterController {
 		var factory = new ConnectionFactory();
 		this.reservationDao = new ReservationDao(factory.createConnection());
 		this.guestRegisterDao = new GuestRegisterDao(factory.createConnection());
+	}
+
+	@FXML
+	void closeGuestScreen(ActionEvent event) {
+		int answer = JOptionPane.showConfirmDialog(null, "¿Desea cancelar el registro del huésped?", "Cancelar",
+				JOptionPane.YES_NO_OPTION);
+		if (answer == JOptionPane.YES_OPTION) {
+			commons.openScreen(event, Routes.USER_MENU.getPath());
+		}
 	}
 
 	@FXML

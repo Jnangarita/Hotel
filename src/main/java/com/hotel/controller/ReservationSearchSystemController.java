@@ -28,6 +28,9 @@ import javafx.stage.Stage;
 public class ReservationSearchSystemController {
 
 	@FXML
+	private Button btnCloseReservationSearchSystemScreen;
+
+	@FXML
 	private Button btnDeleteReservation;
 
 	@FXML
@@ -78,6 +81,11 @@ public class ReservationSearchSystemController {
 
 	public void initialize() {
 		listReservations(GENERAL_LIST);
+	}
+
+	@FXML
+	void closeReservationSearchSystemScreen(ActionEvent event) {
+		commons.openScreen(event, Routes.USER_MENU.getPath());
 	}
 
 	@FXML

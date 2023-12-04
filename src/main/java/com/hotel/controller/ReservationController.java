@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 
 import com.hotel.dao.GuestRegisterDao;
 import com.hotel.dao.ReservationDao;
@@ -24,6 +27,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class ReservationController {
+
+	@FXML
+	private Button btnCloseReservationScreen;
 
 	@FXML
 	private Button btnNext;
@@ -48,10 +54,21 @@ public class ReservationController {
 
 	Commons commons = new Commons();
 
+	private static final Logger logger = Logger.getLogger(ReservationController.class.getName());
+
 	public ReservationController() {
 		var factory = new ConnectionFactory();
 		this.reservationDao = new ReservationDao(factory.createConnection());
 		this.guestRegisterDao = new GuestRegisterDao(factory.createConnection());
+	}
+
+	@FXML
+	void closeReservationScreen(ActionEvent event) {
+		int answer = JOptionPane.showConfirmDialog(null, "¿Desea cancelar la reservación?", "Cancelar",
+				JOptionPane.YES_NO_OPTION);
+		if (answer == JOptionPane.YES_OPTION) {
+			commons.openScreen(event, Routes.USER_MENU.getPath());
+		}
 	}
 
 	@FXML
@@ -61,18 +78,17 @@ public class ReservationController {
 			commons.showNotificationEmptyField();
 			return;
 		}
-
-		String idReservation = util.generateGuestId(guestRegisterDao.getNumberOfGuestRows());
-		LocalDate dateCheckIn = dpDateCheckIn.getValue();
-		Date dpDateCheckInFormat = Date.valueOf(dateCheckIn);
-		LocalDate dateCheckOut = dpDateCheckOut.getValue();
-		Date dpDateCheckOutFormat = Date.valueOf(dateCheckOut);
-		Long reservedDays = util.getReservedDays(dateCheckIn, dateCheckOut);
-		Double reservePrice = Double.parseDouble(txtReservationPrice.getText()) * reservedDays;
-		Reservation reservation = new Reservation(idReservation, dpDateCheckInFormat, dpDateCheckOutFormat,
-				reservePrice, comboPaymentMethod.getValue().toString());
-		Stage stage = (Stage) btnNext.getScene().getWindow(); // Obtiene el Stage actual
 		try {
+			String idReservation = util.generateGuestId(guestRegisterDao.getNumberOfGuestRows());
+			LocalDate dateCheckIn = dpDateCheckIn.getValue();
+			Date dpDateCheckInFormat = Date.valueOf(dateCheckIn);
+			LocalDate dateCheckOut = dpDateCheckOut.getValue();
+			Date dpDateCheckOutFormat = Date.valueOf(dateCheckOut);
+			Long reservedDays = util.getReservedDays(dateCheckIn, dateCheckOut);
+			Double reservePrice = Double.parseDouble(txtReservationPrice.getText()) * reservedDays;
+			Reservation reservation = new Reservation(idReservation, dpDateCheckInFormat, dpDateCheckOutFormat,
+					reservePrice, comboPaymentMethod.getValue().toString());
+			Stage stage = (Stage) btnNext.getScene().getWindow(); // Obtiene el Stage actual
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(Routes.GUEST_REGISTER.getPath()));
 			Parent root = loader.load();
 			GuestRegisterController controller = loader.getController();
@@ -81,6 +97,8 @@ public class ReservationController {
 			stage.setScene(scene);
 		} catch (IOException e) {
 			throw new KnownExceptions("Ocurrió un error en la reservación");
+		} catch (NumberFormatException e) {
+			logger.warning("Error al convertir la cadena a número en el valor de la reserva");
 		}
 	}
 

@@ -76,7 +76,7 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnSignOff" layoutX="721.0" layoutY="1.0" mnemonicParsing="false" onAction="#signOff" style="-fx-background-color: transparent;" text="X">
+      <Button fx:id="btnSignOff" layoutX="721.0" layoutY="1.0" mnemonicParsing="false" onAction="#signOff" style="-fx-background-color: transparent;" text="X" textFill="#2e5acb">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
