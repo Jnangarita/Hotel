@@ -1,5 +1,10 @@
 package com.hotel.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Locale;
+
 import javax.swing.JOptionPane;
 
 import com.hotel.enumerations.Routes;
@@ -8,6 +13,7 @@ import com.hotel.utils.Commons;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class UserMenuController {
 
@@ -19,6 +25,9 @@ public class UserMenuController {
 
 	@FXML
 	private Button btnSignOff;
+
+	@FXML
+	private Label txtCurrentDate;
 
 	Commons commons = new Commons();
 
@@ -39,5 +48,18 @@ public class UserMenuController {
 		if (answer == JOptionPane.YES_OPTION) {
 			commons.openScreen(event, Routes.LOGIN.getPath());
 		}
+	}
+
+	@FXML
+	void initialize() {
+		Date currentDate = Date.valueOf(LocalDate.now());
+
+		// formateador de fecha
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+		// Convertir Date a String utilizando el formateador
+		String formattedDate = dateFormat.format(currentDate);
+
+		txtCurrentDate.setText(formattedDate);
 	}
 }

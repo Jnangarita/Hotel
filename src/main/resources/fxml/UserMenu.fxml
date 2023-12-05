@@ -14,7 +14,7 @@
       <Pane prefHeight="510.0" prefWidth="234.0" style="-fx-background-color: #2e5acb;">
          <children>
             <Separator layoutX="17.0" layoutY="167.0" prefWidth="200.0" />
-            <ImageView fitHeight="101.0" fitWidth="121.0" layoutX="46.0" layoutY="47.0">
+            <ImageView fitHeight="101.0" fitWidth="121.0" layoutX="57.0" layoutY="50.0">
                <image>
                   <Image url="@../img/hotel.png" />
                </image>
@@ -45,7 +45,24 @@
             </Button>
          </children>
       </Pane>
-      <Pane layoutX="234.0" layoutY="60.0" prefHeight="109.0" prefWidth="516.0" style="-fx-background-color: #5b96e8;" />
+      <Pane layoutX="234.0" layoutY="60.0" prefHeight="109.0" prefWidth="516.0" style="-fx-background-color: #5b96e8;">
+         <children>
+            <Label fx:id="txtCurrentDate" alignment="CENTER" layoutX="158.0" layoutY="68.0" prefHeight="27.0" prefWidth="147.0" text="dd/MM/yyyy" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="78.0" layoutY="68.0" text="Hoy es" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="115.0" layoutY="19.0" text="SISTEMA DE RESERVAS" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+         </children></Pane>
       <Label layoutX="252.0" layoutY="192.0" text="Bienvenido">
          <font>
             <Font name="Arial Bold" size="24.0" />
