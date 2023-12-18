@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 
 import com.hotel.dao.UserDao;
+import com.hotel.enumerations.Messages;
 import com.hotel.enumerations.Routes;
 import com.hotel.factory.ConnectionFactory;
 import com.hotel.model.User;
@@ -60,7 +61,7 @@ public class LoginController {
 			commons.openScreen(event, Routes.USER_MENU.getPath());
 		} else {
 			commons.showInvalidUserMessage();
-			logger.warning("***** Usuario y contraseña inválidos *****");
+			logger.warning(Messages.INVALID_CREDENTIALS.getSms());
 			commons.clearTextField(txtUser, txtPassword);
 		}
 	}

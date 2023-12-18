@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 
 import com.hotel.dao.GuestRegisterDao;
+import com.hotel.enumerations.Messages;
 import com.hotel.enumerations.Routes;
 import com.hotel.exception.KnownExceptions;
 import com.hotel.exception.UnknownExceptions;
@@ -110,8 +111,7 @@ public class GuestSearchSystemController {
 	void editGuest(ActionEvent event) {
 		Guest guest = tableGuest.getSelectionModel().getSelectedItem();
 		if (guest == null) {
-			throw new KnownExceptions(
-					"No se ha seleccionado ningún huésped. Por favor, elija un huésped antes de continuar.");
+			throw new KnownExceptions(Messages.REQUIRED_GUEST_SELECTION.getSms());
 		}
 		try {
 			Stage stage = (Stage) btnEditGuest.getScene().getWindow();
@@ -122,7 +122,7 @@ public class GuestSearchSystemController {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 		} catch (IOException e) {
-			throw new UnknownExceptions("Ocurrió un error al tratar de actualizar la información del huésped");
+			throw new UnknownExceptions(Messages.ERROR_UPDATE_GUES_INFORMATION.getSms());
 		}
 	}
 
@@ -134,7 +134,7 @@ public class GuestSearchSystemController {
 	@FXML
 	void searchGuest(ActionEvent event) {
 		if (txtSearch.getText().isEmpty()) {
-			throw new KnownExceptions("El campo de búsqueda no puede ser vació");
+			throw new KnownExceptions(Messages.EMPTY_SEARCH_FIELD.getSms());
 		}
 		listGuests(PARAMETERIZED_LIST);
 	}

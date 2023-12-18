@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import com.hotel.enumerations.Messages;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -71,7 +73,7 @@ public class Commons {
 	}
 
 	public void showNotificationEmptyField() {
-		JOptionPane.showMessageDialog(null, "Los campos no pueden ser vacíos", "Campos Vacíos",
+		JOptionPane.showMessageDialog(null, Messages.EMPTY_FIELD.getSms(), "Campos Vacíos",
 				JOptionPane.WARNING_MESSAGE);
 	}
 

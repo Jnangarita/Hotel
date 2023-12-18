@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.hotel.dao.GuestRegisterDao;
+import com.hotel.enumerations.Messages;
 import com.hotel.enumerations.Nationality;
 import com.hotel.enumerations.Routes;
 import com.hotel.exception.KnownExceptions;
@@ -62,7 +63,7 @@ public class EditGuestController {
 		int result = 0;
 		if (txtName.getText().isEmpty() || txtLastName.getText().isEmpty() || dpBirthdate.getValue() == null
 				|| comboNationality.getValue().toString().isEmpty() || txtPhone.getText().isEmpty()) {
-			throw new KnownExceptions("Los campos no pueden ser vacíos");
+			throw new KnownExceptions(Messages.EMPTY_FIELD.getSms());
 		}
 		Date birthdate = Date.valueOf(dpBirthdate.getValue());
 		Guest guest = new Guest(this.guestController.getId(), txtName.getText(), txtLastName.getText(), birthdate,
@@ -86,8 +87,7 @@ public class EditGuestController {
 			txtReservationNumber.setText(guest.getIdReservation());
 			comboNationality.setValue(Nationality.valueOf(guest.getNationality()));
 		} catch (IllegalArgumentException e) {
-			logger.warning(
-					"La nacionalidad proporcionada no coincide con los valores válidos. Asegúrate de seleccionar una nacionalidad válida de la lista proporcionada");
+			logger.warning(Messages.NATIONALITY_ERROR_INVALID_SELECTION.getSms());
 		}
 	}
 

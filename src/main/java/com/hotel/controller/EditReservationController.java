@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.hotel.dao.ReservationDao;
+import com.hotel.enumerations.Messages;
 import com.hotel.enumerations.PaymentMethod;
 import com.hotel.enumerations.Routes;
 import com.hotel.exception.KnownExceptions;
@@ -56,7 +57,7 @@ public class EditReservationController {
 		int result = 0;
 		if (dpDateCheckIn.getValue() == null && dpDateCheckOut.getValue() == null
 				&& !txtReservationPrice.getText().isEmpty() && comboPaymentMethod.getValue() == null) {
-			throw new KnownExceptions("Los campos no pueden ser vacíos");
+			throw new KnownExceptions(Messages.EMPTY_FIELD.getSms());
 		}
 		Date initialDate = Date.valueOf(dpDateCheckIn.getValue());
 		Date finalDate = Date.valueOf(dpDateCheckOut.getValue());
@@ -79,8 +80,7 @@ public class EditReservationController {
 			dpDateCheckOut.setValue(reservation.getDateCheckOut().toLocalDate());
 			comboPaymentMethod.setValue(PaymentMethod.valueOf(reservation.getPaymentMethod()));
 		} catch (IllegalArgumentException e) {
-			logger.warning(
-					"El método de pago proporcionado no coincide con los valores válidos. Asegúrate de seleccionar un método de pago válido de la lista proporcionada");
+			logger.warning(Messages.PAYMENT_METHOD_ERROR_INVALID_SELECTION.getSms());
 		}
 	}
 

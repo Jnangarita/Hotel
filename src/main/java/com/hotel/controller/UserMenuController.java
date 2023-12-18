@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import javax.swing.JOptionPane;
 
+import com.hotel.enumerations.Messages;
 import com.hotel.enumerations.Routes;
 import com.hotel.utils.Commons;
 
@@ -43,7 +44,7 @@ public class UserMenuController {
 
 	@FXML
 	void signOff(ActionEvent event) {
-		int answer = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?", "Cerrar sesión",
+		int answer = JOptionPane.showConfirmDialog(null, Messages.LOG_OUT.getSms(), Messages.TITLE_LOG_OUT.getSms(),
 				JOptionPane.YES_NO_OPTION);
 		if (answer == JOptionPane.YES_OPTION) {
 			commons.openScreen(event, Routes.LOGIN.getPath());

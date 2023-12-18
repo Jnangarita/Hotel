@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import com.hotel.dao.GuestRegisterDao;
 import com.hotel.dao.ReservationDao;
+import com.hotel.enumerations.Messages;
 import com.hotel.enumerations.Nationality;
 import com.hotel.enumerations.Routes;
 import com.hotel.factory.ConnectionFactory;
@@ -68,8 +69,8 @@ public class GuestRegisterController {
 
 	@FXML
 	void closeGuestScreen(ActionEvent event) {
-		int answer = JOptionPane.showConfirmDialog(null, "¿Desea cancelar el registro del huésped?", "Cancelar",
-				JOptionPane.YES_NO_OPTION);
+		int answer = JOptionPane.showConfirmDialog(null, Messages.CANCEL_GUEST_REGISTRATION.getSms(),
+				Messages.TITLE_CANCEL.getSms(), JOptionPane.YES_NO_OPTION);
 		if (answer == JOptionPane.YES_OPTION) {
 			commons.openScreen(event, Routes.USER_MENU.getPath());
 		}

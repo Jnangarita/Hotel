@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import com.hotel.dao.GuestRegisterDao;
 import com.hotel.dao.ReservationDao;
+import com.hotel.enumerations.Messages;
 import com.hotel.enumerations.PaymentMethod;
 import com.hotel.enumerations.Routes;
 import com.hotel.exception.KnownExceptions;
@@ -64,8 +65,8 @@ public class ReservationController {
 
 	@FXML
 	void closeReservationScreen(ActionEvent event) {
-		int answer = JOptionPane.showConfirmDialog(null, "¿Desea cancelar la reservación?", "Cancelar",
-				JOptionPane.YES_NO_OPTION);
+		int answer = JOptionPane.showConfirmDialog(null, Messages.CANCEL_RESERVATION.getSms(),
+				Messages.TITLE_CANCEL.getSms(), JOptionPane.YES_NO_OPTION);
 		if (answer == JOptionPane.YES_OPTION) {
 			commons.openScreen(event, Routes.USER_MENU.getPath());
 		}
@@ -96,9 +97,9 @@ public class ReservationController {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 		} catch (IOException e) {
-			throw new KnownExceptions("Ocurrió un error en la reservación");
+			throw new KnownExceptions(Messages.ERROR_RESERVATION.getSms());
 		} catch (NumberFormatException e) {
-			logger.warning("Error al convertir la cadena a número en el valor de la reserva");
+			logger.warning(Messages.VALUE_CONVERSION_PROBLEM.getSms());
 		}
 	}
 

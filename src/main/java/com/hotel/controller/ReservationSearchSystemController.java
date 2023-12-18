@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 
 import com.hotel.dao.ReservationDao;
+import com.hotel.enumerations.Messages;
 import com.hotel.enumerations.Routes;
 import com.hotel.exception.KnownExceptions;
 import com.hotel.exception.UnknownExceptions;
@@ -107,8 +108,7 @@ public class ReservationSearchSystemController {
 	void editReservation(ActionEvent event) {
 		Reservation reservation = tableReservation.getSelectionModel().getSelectedItem();
 		if (reservation == null) {
-			throw new KnownExceptions(
-					"No se ha seleccionado ninguna reservación. Por favor, elija una reservación antes de continuar.");
+			throw new KnownExceptions(Messages.RESERVATION_REQUIRED.getSms());
 		}
 		try {
 			Stage stage = (Stage) btnEditReservation.getScene().getWindow();
@@ -119,7 +119,7 @@ public class ReservationSearchSystemController {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 		} catch (IOException e) {
-			throw new UnknownExceptions("Ocurrió un error al tratar de actualizar la información de la reservación");
+			throw new UnknownExceptions(Messages.ERROR_UPDATE_RESERVATION_INFORMATION.getSms());
 		}
 	}
 
@@ -131,7 +131,7 @@ public class ReservationSearchSystemController {
 	@FXML
 	void searchReservation(ActionEvent event) {
 		if (txtSearch.getText().isEmpty()) {
-			throw new KnownExceptions("El campo de búsqueda no puede ser vació");
+			throw new KnownExceptions(Messages.EMPTY_SEARCH_FIELD.getSms());
 		}
 		listReservations(PARAMETERIZED_LIST);
 	}
