@@ -17,6 +17,7 @@ El link del Trello es: https://trello.com/b/EXQ4nVF2/hotel-alura
 * Java 11
 * IDE eclipse
 * MySQL
+* Scene Builder
 
 ### Instalación 🔧
 
